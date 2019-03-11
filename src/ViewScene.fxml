@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="508.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewSceneController">
+<AnchorPane prefHeight="508.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewSceneController">
    <children>
-      <TextField floatText="Data Series" layoutX="25.0" layoutY="36.0" prefHeight="26.0" prefWidth="100.0" />
-      <ComboBox layoutX="139.0" layoutY="40.0" prefWidth="200.0" promptText="1.open" />
-      <ComboBox layoutX="139.0" layoutY="79.0" prefWidth="200.0" promptText="Time_SERIES_INTRADAY" />
-      <ComboBox editable="true" layoutX="139.0" layoutY="118.0" prefWidth="200.0" promptText="MSFT" />
-      <ComboBox layoutX="139.0" layoutY="158.0" prefWidth="200.0" promptText="15 min" />
-      <ComboBox layoutX="139.0" layoutY="202.0" prefHeight="28.0" prefWidth="200.0" promptText="full" />
-      <TextField floatText="Symbol" layoutX="25.0" layoutY="114.0" prefHeight="26.0" prefWidth="100.0" />
-      <TextField floatText="Time Series" layoutX="25.0" layoutY="75.0" prefHeight="26.0" prefWidth="100.0" />
-      <TextField floatText="Time Interval" layoutX="25.0" layoutY="154.0" prefHeight="26.0" prefWidth="100.0" />
-      <TextField floatText="Output Size" layoutX="25.0" layoutY="198.0" prefHeight="26.0" prefWidth="100.0" />
-      <Button layoutX="125.0" layoutY="270.0" mnemonicParsing="false" text="---- Do query ----" />
-      <TextArea layoutX="7.0" layoutY="302.0" prefHeight="200.0" prefWidth="365.0" fx:id="TextArea"/>
+      <ComboBox fx:id="dataSeries" layoutX="139.0" layoutY="40.0" prefWidth="200.0" promptText="1.open" value="1. open" onAction="#handledoQueryAction" />
+      <ComboBox fx:id="timeSeries" layoutX="139.0" layoutY="79.0" prefWidth="200.0" promptText="TIME_SERIES_INTRADAY" value="TIME_SERIES_INTRADAY" />
+      <ComboBox fx:id="symbol" editable="true" layoutX="139.0" layoutY="118.0" prefWidth="200.0" promptText="MSFT" value="MSFT" />
+      <ComboBox fx:id="timeInterval" layoutX="139.0" layoutY="158.0" prefWidth="200.0" promptText="15 min" value="15min" />
+      <ComboBox fx:id="size" layoutX="139.0" layoutY="202.0" prefHeight="28.0" prefWidth="200.0" promptText="full" value="full" />
+      <TextArea fx:id="tArea" layoutX="7.0" layoutY="302.0" prefHeight="200.0" prefWidth="365.0" />
+      <Label layoutX="25.0" layoutY="114.0" prefHeight="26.0" prefWidth="100.0" text="Symbol" />
+      <Label layoutX="25.0" layoutY="75.0" prefHeight="26.0" prefWidth="100.0" text="Time Series" />
+      <Label layoutX="25.0" layoutY="154.0" prefHeight="26.0" prefWidth="100.0" text="Time Interval" />
+      <Label layoutX="25.0" layoutY="198.0" prefHeight="26.0" prefWidth="100.0" text="Output Size" />
+      <Label layoutX="25.0" layoutY="36.0" prefHeight="26.0" prefWidth="100.0" text="Data Series" />
+      <Button fx:id="doQuery" layoutX="125.0" layoutY="270.0" mnemonicParsing="false" onAction="#handledoQueryAction" text="---- Do query ----" />
+      <LineChart fx:id="graph" layoutX="374.0" layoutY="54.0" prefHeight="400.0" prefWidth="365.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
    </children>
 </AnchorPane>
