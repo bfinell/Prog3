@@ -38,16 +38,29 @@ public class ViewSceneController {
     ObservableList<String> tiList = FXCollections.observableArrayList("1min", "5min", "15min", "30min", "60min");
     ObservableList<String> sizeList = FXCollections.observableArrayList("full", "compact");
 
-    ArrayList<String> params = new ArrayList<>();
-
     @FXML
 
 
     protected void handledoQueryAction(ActionEvent event) {
-        StockInfo info = new StockInfo(dataSeries.getValue(),timeSeries.getValue(), symbol.getValue(),timeInterval.getValue() ,size.getValue() );
+        StockInfo info = new StockInfo(dataSeries.getValue(),timeSeries.getValue(), symbol.getValue(),timeInterval.getValue() ,size.getValue());
         info.getData();
         setData(info.getDate(),info.getOpen());
         chartSetter(info.getDate(),info.getOpen());
+    }
+    @FXML
+    private void handleTimeSeriesAction(ActionEvent event){
+        timeInterval.setDisable(false);
+        size.setDisable(false);
+
+        if (!timeSeries.getValue().equals("TIME_SERIES_INTRADAY")){
+            timeInterval.setDisable(true);
+        }
+        if (timeSeries.getValue().equals("TIME_SERIES_WEEKLY")||
+                 timeSeries.getValue().equals("TIME_SERIES_WEEKLY_ADJUSTED")||
+                 timeSeries.getValue().equals("TIME_SERIES_MONTHLY")||
+                 timeSeries.getValue().equals("TIME_SERIES_MONTHLY_ADJUSTED")){
+            size.setDisable(true);
+        }
     }
 
     public void initialize() {
@@ -58,7 +71,7 @@ public class ViewSceneController {
         size.setItems(sizeList);
     }
 
-    public void setData(ArrayList date, ArrayList price) {
+    private void setData(ArrayList date, ArrayList price) {
      date.remove(date.size()-1);
         System.out.println(price.size());
             for (int i =price.size()-1 ; i >=0; i--) {
@@ -67,7 +80,8 @@ public class ViewSceneController {
             }
 
     }
-    public void chartSetter(ArrayList date, ArrayList price){
+    //mom5
+    private void chartSetter(ArrayList date, ArrayList price){
 
         this.graph.getData().clear();
 

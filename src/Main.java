@@ -1,11 +1,15 @@
 import javafx.application.Application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
+// mom1,2,3,4,5
+//mom5 är väldigt fult gjort men hann inte göra dett snyggare
+//använde charm-glisten och gson external librarys
 
 public class Main extends Application {
    static ArrayList <String> parameters = new ArrayList<>();

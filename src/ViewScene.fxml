@@ -11,8 +11,8 @@
 
 <AnchorPane prefHeight="508.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewSceneController">
    <children>
-      <ComboBox fx:id="dataSeries" layoutX="139.0" layoutY="40.0" prefWidth="200.0" promptText="1.open" value="1. open" onAction="#handledoQueryAction" />
-      <ComboBox fx:id="timeSeries" layoutX="139.0" layoutY="79.0" prefWidth="200.0" promptText="TIME_SERIES_INTRADAY" value="TIME_SERIES_INTRADAY" />
+      <ComboBox fx:id="dataSeries" layoutX="139.0" layoutY="40.0" onAction="#handledoQueryAction" prefWidth="200.0" promptText="1.open" value="1. open" />
+      <ComboBox fx:id="timeSeries" layoutX="139.0" layoutY="79.0" prefWidth="200.0" promptText="TIME_SERIES_INTRADAY" value="TIME_SERIES_INTRADAY" onAction="#handleTimeSeriesAction"/>
       <ComboBox fx:id="symbol" editable="true" layoutX="139.0" layoutY="118.0" prefWidth="200.0" promptText="MSFT" value="MSFT" />
       <ComboBox fx:id="timeInterval" layoutX="139.0" layoutY="158.0" prefWidth="200.0" promptText="15 min" value="15min" />
       <ComboBox fx:id="size" layoutX="139.0" layoutY="202.0" prefHeight="28.0" prefWidth="200.0" promptText="full" value="full" />
