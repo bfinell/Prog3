@@ -10,7 +10,10 @@ import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import org.ini4j.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -29,18 +32,26 @@ public class ViewSceneController {
     private ComboBox<String> timeInterval;
     @FXML
     private ComboBox<String> size;
+
     @FXML
     private LineChart<Number,Number> graph;
 
-    ObservableList<String> dList = FXCollections.observableArrayList("1. open", "2. high", "3. low", "4. close", "5. volume");
+
+    private String getIni(String info)throws IOException {
+        Ini ini = new Ini(new File("StockAnalyzer.ini"));
+
+        return ini.get("info").toString();
+    }
+    //"1. open", "2. high", "3. low", "4. close", "5. volume"
+    ObservableList<String> dList = FXCollections.observableArrayList(getIni(""));
     ObservableList<String> tsList = FXCollections.observableArrayList("TIME_SERIES_INTRADAY", "TIME_SERIES_DAILY", "TIME_SERIES_DAILY_ADJUSTED", "TIME_SERIES_WEEKLY", "TIME_SERIES_WEEKLY_ADJUSTED", "TIME_SERIES_MONTHLY", "TIME_SERIES_MONTHLY_ADJUSTED");
     ObservableList<String> symbolList = FXCollections.observableArrayList("MSFT", "AAPL");
     ObservableList<String> tiList = FXCollections.observableArrayList("1min", "5min", "15min", "30min", "60min");
     ObservableList<String> sizeList = FXCollections.observableArrayList("full", "compact");
+  //  ObservableList<String> apikey = FXCollections.observableArrayList("","2");
+
 
     @FXML
-
-
     protected void handledoQueryAction(ActionEvent event) {
         StockInfo info = new StockInfo(dataSeries.getValue(),timeSeries.getValue(), symbol.getValue(),timeInterval.getValue() ,size.getValue());
         info.getData();

@@ -1,11 +1,13 @@
 import com.google.gson.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
+import org.ini4j.*;
 
 public class StockInfo {
    private String symbol;
@@ -13,9 +15,11 @@ public class StockInfo {
    private   String dSeries;
    private   String tSeries;
    private   String interval;
-  private   ArrayList<JsonObject> data = new ArrayList<>();
-    private ArrayList<String> keyset = new ArrayList<>();
-    private   ArrayList<String> open = new ArrayList<>();
+   private String apikey;
+   private   ArrayList<JsonObject> data = new ArrayList<>();
+   private ArrayList<String> keyset = new ArrayList<>();
+   private   ArrayList<String> open = new ArrayList<>();
+
 
 
     public StockInfo(String dSeries, String tSeries, String symbol, String interval, String size){
@@ -24,18 +28,20 @@ public class StockInfo {
             this.symbol=symbol;
             this.interval=interval;
             this.size=size;
+        //    this.apikey = apikey;
 
         }
 // https://www.alphavantage.co/query?function=Time_SERIES_INTRADAY&symbol=MSFT&outputsize=full&apikey=ZR69NHOOT7AMCZH8
 //https://www.alphavantage.co/query?function=Time_SERIES_INTRADAY&symbol=MSFT&interval=60min&outputsize=full&apikey=ZR69NHOOT7AMCZH8
         private String URLBuilder(){
         String finalURL ="";
+
         if (this.tSeries.equals("TIME_SERIES_INTRADAY")){
              finalURL= "https://www.alphavantage.co/query?function=" +
                     tSeries+"&symbol=" +
                     symbol+"&interval=" +
                     interval+"&outputsize=" +
-                    size+"&apikey=ZR69NHOOT7AMCZH8";
+                    size+"&apikey="+apikey;
             return finalURL;
         }
           else {
