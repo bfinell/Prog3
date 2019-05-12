@@ -2,13 +2,13 @@
   <library name="charm-glisten-4.4.1">
     <CLASSES>
       <root url="jar://$USER_HOME$/Downloads/charm-glisten-4.4.1.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/json-20180813.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/gson-2.8.5.jar!/" />
-      <root url="jar://$PROJECT_DIR$/ini4j-0.5.4-bin/ini4j-0.5.4/ini4j-0.5.4.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/ini4j-0.5.4" />
+      <root url="jar://$USER_HOME$/Downloads/gson-2.8.2.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Downloads/gson-2.8.5-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Downloads/ini4j-0.5.4" recursive="false" />
   </library>
 </component>

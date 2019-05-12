@@ -1,18 +1,15 @@
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import org.ini4j.*;
 
-import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,28 +29,58 @@ public class ViewSceneController {
     private ComboBox<String> timeInterval;
     @FXML
     private ComboBox<String> size;
-
+    @FXML
+    private ComboBox<String> API_KEY;
     @FXML
     private LineChart<Number,Number> graph;
 
+    ObservableList<String> apiKey = FXCollections.observableArrayList();
+    ObservableList<String> dList = FXCollections.observableArrayList();
+    ObservableList<String> tsList = FXCollections.observableArrayList();
+    ObservableList<String> symbolList = FXCollections.observableArrayList();
+    ObservableList<String> tiList = FXCollections.observableArrayList();
+    ObservableList<String> sizeList = FXCollections.observableArrayList();
 
-    private String getIni(String info)throws IOException {
-        Ini ini = new Ini(new File("StockAnalyzer.ini"));
+    private void fillLists()throws IOException{
+    Ini ini = new Ini(new FileReader("./src/StockAnalyzer.ini"));
+    String key = ini.get("controllInfo","API_KEY");
+    apiKey.setAll(key);
 
-        return ini.get("info").toString();
+    String dString = ini.get("controllInfo","DATA_SERIES");
+    String[] dInfo = dString.split(",");
+    dList.addAll(dInfo);
+
+    String tsString = ini.get("controllInfo","TIME_SERIES");
+    String[] tsInfo = tsString.split(",");
+    tsList.addAll(tsInfo);
+
+    String sString = ini.get("controllInfo","SYMBOL");
+    String[] sInfo = sString.split(",");
+    symbolList.addAll(sInfo);
+
+    String tiString = ini.get("controllInfo","TIME_INTERVAL");
+    String[] tiInfo = tiString.split(",");
+    tiList.addAll(tiInfo);
+
+    String osString = ini.get("controllInfo","OUTPUT_SIZE");
+    String[] osInfo = osString.split(",");
+    sizeList.addAll(osInfo);
     }
-    //"1. open", "2. high", "3. low", "4. close", "5. volume"
-    ObservableList<String> dList = FXCollections.observableArrayList(getIni(""));
-    ObservableList<String> tsList = FXCollections.observableArrayList("TIME_SERIES_INTRADAY", "TIME_SERIES_DAILY", "TIME_SERIES_DAILY_ADJUSTED", "TIME_SERIES_WEEKLY", "TIME_SERIES_WEEKLY_ADJUSTED", "TIME_SERIES_MONTHLY", "TIME_SERIES_MONTHLY_ADJUSTED");
-    ObservableList<String> symbolList = FXCollections.observableArrayList("MSFT", "AAPL");
-    ObservableList<String> tiList = FXCollections.observableArrayList("1min", "5min", "15min", "30min", "60min");
-    ObservableList<String> sizeList = FXCollections.observableArrayList("full", "compact");
-  //  ObservableList<String> apikey = FXCollections.observableArrayList("","2");
+
+    public void initialize()throws IOException {
+        fillLists();
+        API_KEY.setItems(apiKey);
+        dataSeries.setItems(dList);
+        timeSeries.setItems(tsList);
+        symbol.setItems(symbolList);
+        timeInterval.setItems(tiList);
+        size.setItems(sizeList);
+    }
 
 
     @FXML
     protected void handledoQueryAction(ActionEvent event) {
-        StockInfo info = new StockInfo(dataSeries.getValue(),timeSeries.getValue(), symbol.getValue(),timeInterval.getValue() ,size.getValue());
+        StockInfo info = new StockInfo(dataSeries.getValue(),timeSeries.getValue(), symbol.getValue(),timeInterval.getValue() ,size.getValue(),API_KEY.getValue());
         info.getData();
         setData(info.getDate(),info.getOpen());
         chartSetter(info.getDate(),info.getOpen());
@@ -74,13 +101,7 @@ public class ViewSceneController {
         }
     }
 
-    public void initialize() {
-        dataSeries.setItems(dList);
-        timeSeries.setItems(tsList);
-        symbol.setItems(symbolList);
-        timeInterval.setItems(tiList);
-        size.setItems(sizeList);
-    }
+
 
     private void setData(ArrayList date, ArrayList price) {
      date.remove(date.size()-1);

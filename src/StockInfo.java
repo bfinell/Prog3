@@ -15,20 +15,20 @@ public class StockInfo {
    private   String dSeries;
    private   String tSeries;
    private   String interval;
-   private String apikey;
+   private  String apiKey;
    private   ArrayList<JsonObject> data = new ArrayList<>();
    private ArrayList<String> keyset = new ArrayList<>();
    private   ArrayList<String> open = new ArrayList<>();
 
 
 
-    public StockInfo(String dSeries, String tSeries, String symbol, String interval, String size){
+    public StockInfo(String dSeries, String tSeries, String symbol, String interval, String size,String apiKey){
             this.dSeries=dSeries;
             this.tSeries=tSeries;
             this.symbol=symbol;
             this.interval=interval;
             this.size=size;
-        //    this.apikey = apikey;
+            this.apiKey = apiKey;
 
         }
 // https://www.alphavantage.co/query?function=Time_SERIES_INTRADAY&symbol=MSFT&outputsize=full&apikey=ZR69NHOOT7AMCZH8
@@ -41,7 +41,7 @@ public class StockInfo {
                     tSeries+"&symbol=" +
                     symbol+"&interval=" +
                     interval+"&outputsize=" +
-                    size+"&apikey="+apikey;
+                    size+"&apikey="+apiKey;
             return finalURL;
         }
           else {
@@ -49,7 +49,7 @@ public class StockInfo {
                       "https://www.alphavantage.co/query?function=" +
                               tSeries+"&symbol=" +
                               symbol+"&outputsize=" +
-                              size+"&apikey=ZR69NHOOT7AMCZH8";
+                              size+"&apikey="+apiKey;//=ZR69NHOOT7AMCZH8";
               return finalURL;
 
         }

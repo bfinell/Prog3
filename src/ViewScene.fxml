@@ -7,22 +7,27 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="508.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewSceneController">
+<AnchorPane prefHeight="619.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewSceneController">
    <children>
       <ComboBox fx:id="dataSeries" layoutX="139.0" layoutY="40.0" onAction="#handledoQueryAction" prefWidth="200.0" promptText="1.open" value="1. open" />
-      <ComboBox fx:id="timeSeries" layoutX="139.0" layoutY="79.0" prefWidth="200.0" promptText="TIME_SERIES_INTRADAY" value="TIME_SERIES_INTRADAY" onAction="#handleTimeSeriesAction"/>
+      <ComboBox fx:id="timeSeries" layoutX="139.0" layoutY="79.0" onAction="#handleTimeSeriesAction" prefWidth="200.0" promptText="TIME_SERIES_INTRADAY" value="TIME_SERIES_INTRADAY" />
       <ComboBox fx:id="symbol" editable="true" layoutX="139.0" layoutY="118.0" prefWidth="200.0" promptText="MSFT" value="MSFT" />
       <ComboBox fx:id="timeInterval" layoutX="139.0" layoutY="158.0" prefWidth="200.0" promptText="15 min" value="15min" />
       <ComboBox fx:id="size" layoutX="139.0" layoutY="202.0" prefHeight="28.0" prefWidth="200.0" promptText="full" value="full" />
-      <TextArea fx:id="tArea" layoutX="7.0" layoutY="302.0" prefHeight="200.0" prefWidth="365.0" />
+      <TextArea fx:id="tArea" layoutX="14.0" layoutY="405.0" prefHeight="200.0" prefWidth="365.0" />
+      <ComboBox fx:id="API_KEY" editable="true" layoutX="139.0" layoutY="2.0" prefWidth="200.0" promptText="demo" value="ZR69NHOOT7AMCZH8" />
+      <TextField fx:id="startDate" layoutX="139.0" layoutY="242.0" />
+      <TextField fx:id="stopDate" layoutX="139.0" layoutY="285.0" />
+
       <Label layoutX="25.0" layoutY="114.0" prefHeight="26.0" prefWidth="100.0" text="Symbol" />
       <Label layoutX="25.0" layoutY="75.0" prefHeight="26.0" prefWidth="100.0" text="Time Series" />
       <Label layoutX="25.0" layoutY="154.0" prefHeight="26.0" prefWidth="100.0" text="Time Interval" />
       <Label layoutX="25.0" layoutY="198.0" prefHeight="26.0" prefWidth="100.0" text="Output Size" />
       <Label layoutX="25.0" layoutY="36.0" prefHeight="26.0" prefWidth="100.0" text="Data Series" />
-      <Button fx:id="doQuery" layoutX="125.0" layoutY="270.0" mnemonicParsing="false" onAction="#handledoQueryAction" text="---- Do query ----" />
+      <Button fx:id="doQuery" layoutX="142.0" layoutY="365.0" mnemonicParsing="false" onAction="#handledoQueryAction" text="---- Do query ----" />
       <LineChart fx:id="graph" layoutX="374.0" layoutY="54.0" prefHeight="400.0" prefWidth="365.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
@@ -31,5 +36,9 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
+      <Label layoutX="25.0" layoutY="2.0" prefHeight="26.0" prefWidth="100.0" text="API_KEY" />
+
+      <Label layoutX="25.0" layoutY="242.0" prefHeight="26.0" prefWidth="100.0" text="Start Date" />
+      <Label layoutX="25.0" layoutY="284.0" prefHeight="26.0" prefWidth="100.0" text="Stop Date" />
    </children>
 </AnchorPane>
